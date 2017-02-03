@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="validator.js"></script>
+        <script type="text/javascript">
+            let Validator = window.Validator;
+
+            let validator = new Validator()
+
+                .validation('main.validation', {
+                        handler: element => element.value == 'valid',
+                        message: element => `'${ element.value }' is not valid`
+                    }, {
+                        handler: element => element.value != '',
+                        message: element => `'${ element.name }' is required`
+                    }
+                )
+
+                .effect('main.output', {
+                        error: (_, errors, dependencies) => dependencies.container.text = errors.join(', '),
+                        success: (_, __, dependencies) => dependencies.container.text = ''
+                    }
+                );
+
+
+            let fields = [
+                { value: 'valid' },
+                { value: 'invalid', name: 'invalidField' },
+                { value: '', name: 'requiredField' }
+            ];
+            let errorContainer = [];
+
+            validator.validate({
+                elements: fields,
+                dependencies: { container: errorContainer },
+                
+                validation: 'main.validation',
+                effect: 'main.output',
+            });
+
+        </script>
+    </body>
+</html>
