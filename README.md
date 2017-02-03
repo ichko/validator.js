@@ -45,6 +45,7 @@ validator.validate({
     
     validationName: 'main.validation',
     effectName: 'main.output',
+    
     params: {
         required: true,
         range: { min: 5, max: 10 }
