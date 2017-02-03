@@ -50,7 +50,6 @@ validator.validate({
         required: true,
         range: { min: 5, max: 10 }
     }
-    
 });
 ```
 
