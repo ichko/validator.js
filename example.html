@@ -6,44 +6,40 @@
     <body>
         <script type="text/javascript" src="validator.js"></script>
         <script type="text/javascript">
+        
+            let validator = new Validator()
 
-            window.onload = () => {
+                .validation('main.validation', {
+                        handler: element => element.value == 'valid',
+                        message: element => `'${ element.name }' is not valid`
+                    }, {
+                        handler: element => element.value != '',
+                        message: element => `'${ element.name }' is required`
+                    }
+                )
 
-                let validator = new Validator()
-    
-                    .validation('main.validation', {
-                            handler: element => element.value == 'valid',
-                            message: element => `'${ element.name }' is not valid`
-                        }, {
-                            handler: element => element.value != '',
-                            message: element => `'${ element.name }' is required`
-                        }
-                    )
-    
-                    .effect('main.output', {
-                            error: (_, errors, { container }) =>
-                                container.log(errors.join(', ')),
-                            success: (element, _, { container }) =>
-                                container.log(`'${ element.name }' is valid`)
-                        }
-                    );
-    
-    
-                let fields = [
-                    { value: 'valid', name: 'validField' },
-                    { value: 'invalid', name: 'invalidField' },
-                    { value: '', name: 'requiredField' }
-                ];
-    
-                validator.validate({
-                    elements: fields,
-                    dependencies: { container: console },
-                    
-                    validation: 'main.validation',
-                    effect: 'main.output',
-                });
+                .effect('main.output', {
+                        error: (_, errors, { container }) =>
+                            container.log(errors.join(', ')),
+                        success: (element, _, { container }) =>
+                            container.log(`'${ element.name }' is valid`)
+                    }
+                );
 
-            };
+
+            let fields = [
+                { value: 'valid', name: 'validField' },
+                { value: 'invalid', name: 'invalidField' },
+                { value: '', name: 'requiredField' }
+            ];
+
+            validator.validate({
+                elements: fields,
+                dependencies: { container: console },
+                
+                validation: 'main.validation',
+                effect: 'main.output',
+            });
 
         </script>
     </body>
