@@ -1,7 +1,7 @@
-## validator.js
+# validator.js
 Simple js validation library
 
-# Example
+## Example
 
 ```javascript
 let validator = new Validator()
