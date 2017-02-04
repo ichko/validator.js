@@ -1,9 +1,3 @@
-# validator.js
-Simple js validation library
-
-## Example
-
-```javascript
 let validator = new Validator()
 
     .filter('filters.range', ({ element }) => element.type == 'number')
@@ -45,16 +39,9 @@ validator.validate({
     
     validationName: 'main.validation',
     effectName: 'main.output',
-    
+
     params: {
         required: true,
         range: { min: 5, max: 10 }
     }
 });
-```
-
-## Console output
- - 'validField' is valid
- - 'invalidField' is not valid
- - 'requiredField' is not valid, 'requiredField' is required
- - 'rangeField' is not valid, 'rangeField' should be in range 5 - 10
